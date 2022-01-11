@@ -1,4 +1,5 @@
 const app = require("./src/app");
+const http = require("http");
 const { PORT } = require("./src/config");
 const { initDatabaseConnection } = require("./src/models");
 
