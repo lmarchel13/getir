@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const { RecordService } = require("../services");
+const { Record: RecordModel } = require("../models");
 const { loadRecordsValidation } = require("../middlewares");
 const {
   HTTPStatusCode,
@@ -10,6 +11,8 @@ const {
 
 const router = Router();
 
+const recordService = RecordService(RecordModel);
+
 router.post("/", loadRecordsValidation, async (req, res) => {
   try {
     const { startDate, endDate, minCount, maxCount } = req.body;
@@ -18,7 +21,7 @@ router.post("/", loadRecordsValidation, async (req, res) => {
       JSON.stringify({ startDate, endDate, minCount, maxCount })
     );
 
-    const records = await RecordService.Load({
+    const records = await recordService.Load({
       startDate,
       endDate,
       minCount,

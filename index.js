@@ -1,6 +1,13 @@
-const server = require("./src/app");
+const app = require("./src/app");
 const { PORT } = require("./src/config");
+const { initDatabaseConnection } = require("./src/models");
 
-server.listen(PORT, () => {
-  console.info(`Listening to port ${PORT}`);
-});
+const startServer = () => {
+  const server = http.createServer(app);
+
+  server.listen(PORT, () => {
+    console.info(`Listening to port ${PORT}`);
+  });
+};
+
+initDatabaseConnection(startServer);
